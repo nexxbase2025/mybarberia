@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mi Barbería</title>
+  <style>
+    :root{
+      --blue:#0d3b66; --red:#d7263d; --white:#ffffff; --dark:#0b2239; --stripeBlue:#1e4e82;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--blue);color:var(--white);overflow-x:hidden;}
+    a{color:var(--white);text-decoration:none}
+
+    /* Header */
+    header{
+      background:var(--dark);
+      border-bottom:4px solid var(--red);
+    }
+    .header-inner{
+      max-width:1100px; margin:0 auto; padding:10px 16px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .head-left{display:flex; align-items:center; gap:10px;}
+    .logo{
+      width:50px; height:50px; border-radius:50%; object-fit:cover;
+      border:2px solid var(--white);
+    }
+    h1{margin:0; font-size:1.5rem; white-space:nowrap;}
+
+    .inicio-btn{
+      background:transparent; color:var(--white);
+      border:2px solid var(--white); border-radius:20px;
+      padding:5px 12px; font-size:.8rem; cursor:pointer;
+    }
+    .inicio-btn:hover{background:var(--white); color:var(--dark);}
+
+    /* Burbujas horizontales */
+    .nav-row{
+      max-width:1100px; margin:0 auto; padding:8px 16px 0;
+      display:grid; grid-template-columns:1fr 1fr 1fr; align-items:center;
+    }
+    .bubble{
+      border:2px solid var(--white); background:transparent; color:var(--white);
+      border-radius:20px; padding:6px 12px; font-size:.85rem; cursor:pointer; transition:.2s;
+      width:max-content; justify-self:start;
+    }
+    .bubble.center{justify-self:center;}
+    .bubble.right{justify-self:end;}
+    .bubble:hover{background:var(--white); color:var(--dark);}
+
+    /* Franja tricolor */
+    .stripe{
+      height:6px;
+      background:repeating-linear-gradient(45deg,
+        var(--red) 0 12px, var(--white) 12px 24px, var(--stripeBlue) 24px 36px
+      );
+      width:100%;
+    }
+
+    /* Contenedor */
+    .container{max-width:1100px; margin:0 auto; padding:16px;}
+
+    /* Imagen de portada */
+    .hero{margin-top:16px;}
+    .hero img{width:100%; max-height:360px; object-fit:cover; border-radius:10px;}
+    .hero-text{margin:12px 0;font-size:1.1rem;text-align:center;}
+
+    /* Caja de cita */
+    .card{
+      background:#0f2745; border-radius:12px; padding:16px;
+      max-width:520px; margin:16px auto; box-shadow:0 2px 10px rgba(0,0,0,.25);
+    }
+    label{font-size:.9rem; display:block; margin-top:10px;}
+    input,textarea,select,button{
+      width:100%; padding:12px; margin-top:6px; border-radius:8px;
+      border:1px solid rgba(255,255,255,.35); background:rgba(255,255,255,.1); color:var(--white);
+      font-size:1rem;
+    }
+    textarea{min-height:110px;}
+    button.primary{
+      background:linear-gradient(90deg,var(--red),#ff6b81); border:none; font-weight:700; cursor:pointer; margin-top:14px;
+    }
+    button.primary:hover{filter:brightness(1.05);}
+
+    /* Galerías */
+    .gallery{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-top:16px;}
+    .gallery img{width:100%; height:160px; object-fit:cover; border-radius:8px;}
+
+    /* Servicios */
+    .service{background:#13355c; border-radius:10px; overflow:hidden;}
+    .service img{width:100%; height:170px; object-fit:cover;}
+    .service p{padding:8px; font-size:.95rem;}
+
+    .section{display:none;}
+    #inicio.section{display:block;}
+
+    /* Footer */
+    footer{margin-top:24px; padding:14px 12px; text-align:center; background:#0a1f36;}
+    .social{display:flex; gap:12px; justify-content:center; margin-bottom:6px;}
+    .social img{width:22px; height:22px;}
+    .copy{font-size:.9rem; opacity:.9;}
+
+    @media (max-width:380px){
+      .bubble{font-size:.8rem; padding:5px 9px;}
+      .inicio-btn{font-size:.75rem; padding:4px 9px;}
+      .logo{width:46px; height:46px;}
+      h1{font-size:1.25rem;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <div class="head-left">
+        <img src="https://via.placeholder.com/100.png?text=Aqu%C3%AD+tu+logo" alt="Aquí tu logo" class="logo">
+        <h1>Mi Barbería</h1>
+      </div>
+      <button class="inicio-btn" data-target="inicio" data-i18n="nav.home">Inicio</button>
+    </div>
+
+    <div class="nav-row">
+      <button class="bubble left"   data-target="estilos"   data-i18n="nav.styles">Nuestros Estilos</button>
+      <button class="bubble center" data-target="servicios" data-i18n="nav.services">Nuestros Servicios</button>
+      <button class="bubble right"  data-target="cita"      data-i18n="nav.book">Agenda una cita</button>
+    </div>
+    <div class="stripe"></div>
+  </header>
+
+  <main class="container">
+    <!-- INICIO -->
+    <section id="inicio" class="section">
+      <div class="hero">
+        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1600" alt="Barbero trabajando">
+        <div class="hero-text" data-i18n="hero.subtitle">Luce un estilo diferente. Luce genial. Atrapa miradas.</div>
+      </div>
+
+      <div class="card">
+        <h2 data-i18n="contact.title">Agenda una cita</h2>
+        <label data-i18n="contact.name">Nombre y Apellido</label>
+        <input type="text">
+        <label data-i18n="contact.email">Correo Electrónico</label>
+        <input type="email">
+        <label data-i18n="contact.phone">Número de Teléfono</label>
+        <input type="tel">
+        <label data-i18n="contact.msg">Necesito agendar una cita para:</label>
+        <textarea></textarea>
+        <label data-i18n="contact.channel">Enviar por:</label>
+        <select>
+          <option value="whatsapp">WhatsApp</option>
+          <option value="sms">SMS</option>
+        </select>
+        <button class="primary" data-i18n="contact.button">Agendar</button>
+      </div>
+    </section>
+
+    <!-- ESTILOS -->
+    <section id="estilos" class="section">
+      <h2 data-i18n="styles.title">Nuestros Estilos</h2>
+      <div class="gallery">
+        <img src="https://picsum.photos/400/300?1"><img src="https://picsum.photos/400/300?2"><img src="https://picsum.photos/400/300?3">
+        <img src="https://picsum.photos/400/300?4"><img src="https://picsum.photos/400/300?5"><img src="https://picsum.photos/400/300?6">
+        <img src="https://picsum.photos/400/300?7"><img src="https://picsum.photos/400/300?8"><img src="https://picsum.photos/400/300?9">
+        <img src="https://picsum.photos/400/300?10">
+      </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="servicios" class="section">
+      <h2 data-i18n="services.title">Nuestros Servicios</h2>
+      <div class="gallery">
+        <div class="service"><img src="https://picsum.photos/500/340?11"><p><strong data-i18n="services.kids.title">Cortes para Niños</strong>: <span data-i18n="services.kids.desc">Ofrecemos cortes desde los 2 años en adelante.</span></p></div>
+        <div class="service"><img src="https://picsum.photos/500/340?12"><p><strong data-i18n="services.adults.title">Cortes para Adultos</strong>: <span data-i18n="services.adults.desc">Siempre un estilo y peinado diferente.</span></p></div>
+        <div class="service"><img src="https://picsum.photos/500/340?13"><p><strong data-i18n="services.beard.title">Barba y Bigote</strong>: <span data-i18n="services.beard.desc">Cuidamos tu barba con un corte espectacular.</span></p></div>
+        <div class="service"><img src="https://picsum.photos/500/340?14"><p><strong data-i18n="services.color.title">Coloración</strong>: <span data-i18n="services.color.desc">Realza tu estilo con tintes modernos.</span></p></div>
+        <div class="service"><img src="https://picsum.photos/500/340?15"><p><strong data-i18n="services.shave.title">Afeitado Clásico</strong>: <span data-i18n="services.shave.desc">Relájate con una experiencia premium.</span></p></div>
+      </div>
+    </section>
+
+    <!-- CITA -->
+    <section id="cita" class="section">
+      <div class="card">
+        <h2 data-i18n="contact.title">Agenda una cita</h2>
+        <label data-i18n="contact.name">Nombre y Apellido</label>
+        <input type="text">
+        <label data-i18n="contact.email">Correo Electrónico</label>
+        <input type="email">
+        <label data-i18n="contact.phone">Número de Teléfono</label>
+        <input type="tel">
+        <label data-i18n="contact.msg">Necesito agendar una cita para:</label>
+        <textarea></textarea>
+        <label data-i18n="contact.channel">Enviar por:</label>
+        <select>
+          <option value="whatsapp">WhatsApp</option>
+          <option value="sms">SMS</option>
+        </select>
+        <button class="primary" data-i18n="contact.button">Agendar</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="social">
+      <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg"></a>
+      <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"></a>
+      <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg"></a>
+      <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg"></a>
+    </div>
+    <div class="copy">© Mi Barbería 2025</div>
+  </footer>
+
+  <script>
+    // Navegación
+    const buttons=document.querySelectorAll('[data-target]');
+    const sections=document.querySelectorAll('.section');
+    function show(id){
+      sections.forEach(s=>s.style.display='none');
+      document.getElementById(id).style.display='block';
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+    buttons.forEach(b=>b.addEventListener('click',()=>show(b.dataset.target)));
+
+    // Traducción
+    const dict={es:{
+      'nav.home':'Inicio','nav.styles':'Nuestros Estilos','nav.services':'Nuestros Servicios','nav.book':'Agenda una cita',
+      'hero.subtitle':'Luce un estilo diferente. Luce genial. Atrapa miradas.',
+      'contact.title':'Agenda una cita','contact.name':'Nombre y Apellido','contact.email':'Correo Electrónico','contact.phone':'Número de Teléfono',
+      'contact.msg':'Necesito agendar una cita para:','contact.channel':'Enviar por:','contact.button':'Agendar',
+      'services.title':'Nuestros Servicios','styles.title':'Nuestros Estilos',
+      'services.kids.title':'Cortes para Niños','services.kids.desc':'Ofrecemos cortes desde los 2 años en adelante.',
+      'services.adults.title':'Cortes para Adultos','services.adults.desc':'Siempre un estilo y peinado diferente.',
+      'services.beard.title':'Barba y Bigote','services.beard.desc':'Cuidamos tu barba con un corte espectacular.',
+      'services.color.title':'Coloración','services.color.desc':'Realza tu estilo con tintes modernos.',
+      'services.shave.title':'Afeitado Clásico','services.shave.desc':'Relájate con una experiencia premium.'
+    },en:{
+      'nav.home':'Home','nav.styles':'Our Styles','nav.services':'Our Services','nav.book':'Book',
+      'hero.subtitle':'Look different. Look great. Turn heads.',
+      'contact.title':'Book an appointment','contact.name':'Full Name','contact.email':'Email','contact.phone':'Phone Number',
+      'contact.msg':'I need to book an appointment for:','contact.channel':'Send via:','contact.button':'Book now',
+      'services.title':'Our Services','styles.title':'Our Styles',
+      'services.kids.title':'Kids Haircuts','services.kids.desc':'We offer cuts starting at age 2.',
+      'services.adults.title':'Adult Haircuts','services.adults.desc':'Always a fresh, unique style.',
+      'services.beard.title':'Beard & Mustache','services.beard.desc':'We take care of your beard with style.',
+      'services.color.title':'Coloring','services.color.desc':'Boost your look with modern dyes.',
+      'services.shave.title':'Classic Shave','services.shave.desc':'Relax with a premium experience.'
+    }};
+    const lang=navigator.language.startsWith('en')?'en':'es';
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key=el.dataset.i18n;
+      if(el.tagName==='INPUT' || el.tagName==='TEXTAREA'){
+        el.placeholder=dict[lang][key]||el.placeholder;
+      }else{
+        el.textContent=dict[lang][key]||el.textContent;
+      }
+    });
+  </script>
+</body>
+</html>
